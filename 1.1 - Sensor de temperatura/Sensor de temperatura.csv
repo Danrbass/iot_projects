@@ -1,0 +1,8 @@
+﻿Nome,Quantidade,Componente
+"USensor de temperatura",1," Sensor de temperatura [TMP36]"
+"U1",1," Arduino Uno R3"
+"R3, R2, R1",3,"1 kΩ Resistor"
+"D1",1,"Vermelho LED"
+"D2",1,"Azul LED"
+"D3",1,"Verde LED"
+"R4, RR5_Terra, RR6_Terra",3,"330 Ω Resistor"
