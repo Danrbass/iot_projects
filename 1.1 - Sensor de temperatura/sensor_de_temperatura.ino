@@ -1,61 +1,61 @@
-const int PinRoj = 8;
-const int PinAzu = 9;
-const int PinVer = 10;
+const int PinRed = 8;
+const int PinBlue = 9;
+const int PinGreen = 10;
 const int pinTMP = A0;  // Clareza que é o pino analógico
 
 void setup() 
 {
-  pinMode(PinRoj, OUTPUT);
-  pinMode(PinAzu, OUTPUT);
-  pinMode(PinVer, OUTPUT);
+  pinMode(PinRed, OUTPUT);
+  pinMode(PinBlue, OUTPUT);
+  pinMode(PinGreen, OUTPUT);
 
   Serial.begin(9600);
 
   // Estado inicial
-  digitalWrite(PinRoj, LOW); 
-  digitalWrite(PinAzu, LOW); 
-  digitalWrite(PinVer, HIGH);
+  digitalWrite(PinRed, LOW); 
+  digitalWrite(PinBlue, LOW); 
+  digitalWrite(PinGreen, HIGH);
 }
 
 void loop() {
-  int valorTMP = analogRead(pinTMP);
+  int valueTMP = analogRead(pinTMP);
 
   // Converte valor para tensão (0 a 5V)
-  float tensao = valorTMP * (5.0 / 1023.0);
+  float tension = valueTMP * (5.0 / 1023.0);
 
   // Para sensor TMP36:
-  float temperaturaC = (tensao - 0.5) * 100.0;
+  float temperatureC = (tension - 0.5) * 100.0;
 
   // Mostra tudo no monitor serial
   Serial.print("Leitura bruta: ");
-  Serial.print(valorTMP);
+  Serial.print(valueTMP);
   Serial.print(" | Tensão: ");
-  Serial.print(tensao);
+  Serial.print(tension);
   Serial.print(" V | Temperatura: ");
-  Serial.print(temperaturaC);
+  Serial.print(temperatureC);
   Serial.println(" °C");
 
   // Estados padrão
-  bool estadoRoj = LOW;
-  bool estadoAzu = LOW;
-  bool estadoVer = LOW;
+  bool stateRed = LOW;
+  bool stateBlue = LOW;
+  bool stateGreen = LOW;
 
   // Regras baseadas na leitura analógica
-  if (valorTMP <= 125) {
-    estadoAzu = HIGH;
+  if (valueTMP <= 125) {
+    stateBlue = HIGH;
   } 
-  else if (valorTMP > 125 and valorTMP <= 160) {
-    estadoVer = HIGH;
+  else if (valueTMP > 125 and valueTMP <= 160) {
+    stateGreen = HIGH;
   } 
   else {
-    estadoRoj = HIGH;
+    stateRed = HIGH;
     
   }
 
   // Atualiza os LEDs
-  digitalWrite(PinRoj, estadoRoj);
-  digitalWrite(PinAzu, estadoAzu);
-  digitalWrite(PinVer, estadoVer);
+  digitalWrite(PinRed, stateRed);
+  digitalWrite(PinBlue, stateBlue);
+  digitalWrite(PinGreen, stateGreen);
 
   delay(1000);  // Ajuda a estabilizar e visualizar
 }
